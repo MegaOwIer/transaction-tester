@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <unordered_set>
 #include <unordered_map>
 
 #include "Framework/RecordType.h"
@@ -32,8 +33,9 @@ private:
     // NOTE: look at here!
 
     // Fill your transaction-specfied data here
-    // e.g. transaction timestamp
     timestamp_t timestamp;
+    std::unordered_set<RecordKey> access_history;  // All elements accessed in this transaction.
+    std::vector<std::pair<RecordKey, RecordData>> write_log;
 
     // These 5 functions below are the framework's interface
     // Return false on ANY function means the transaction should ROLLBACK
